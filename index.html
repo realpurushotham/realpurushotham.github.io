@@ -1,249 +1,755 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Purushotham — Lead Product Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    :root {
+      --bg: #f9f7f4;
+      --surface: #ffffff;
+      --text-primary: #111111;
+      --text-secondary: #555555;
+      --text-muted: #999999;
+      --accent: #e8572a;
+      --accent-soft: #fdf1ec;
+      --border: #e8e4df;
+      --radius: 16px;
+    }
 
-<title>Your Name</title>
+    html { scroll-behavior: smooth; }
 
-<style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
 
-body{
-font-family: Georgia, serif;
-margin:0;
-background:#ffffff;
-color:#222;
-line-height:1.7;
-}
+    /* ─── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(249, 247, 244, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav.scrolled { border-bottom-color: var(--border); }
 
-/* Navigation */
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-logo span { color: var(--accent); }
 
-.nav{
-max-width:900px;
-margin:auto;
-display:flex;
-justify-content:space-between;
-padding:20px;
-font-size:14px;
-}
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
 
-.nav a{
-text-decoration:none;
-color:#333;
-margin-left:20px;
-}
+    /* ─── HERO ────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 48px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-/* Hero */
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      width: 100%;
+    }
 
-.hero{
-text-align:center;
-padding:60px 20px;
-}
+    .hero-text {}
 
-.hero img{
-width:120px;
-height:120px;
-border-radius:50%;
-margin-bottom:20px;
-}
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
 
-.hero h1{
-font-size:32px;
-margin:0;
-}
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      color: var(--text-primary);
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
 
-.hero p{
-color:#666;
-font-size:16px;
-}
+    .hero-bio {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 440px;
+      margin-bottom: 40px;
+      line-height: 1.75;
+    }
 
-/* Content */
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .stat-item {}
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
 
-.container{
-max-width:720px;
-margin:auto;
-padding:40px 20px;
-}
+    .hero-photo {
+      position: relative;
+      aspect-ratio: 4/5;
+      border-radius: 24px;
+      overflow: hidden;
+      background: var(--border);
+    }
+    .hero-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .hero-photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #f0ece7 0%, #e8e2db 100%);
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+    .hero-photo-placeholder svg {
+      width: 48px; height: 48px;
+      opacity: 0.4;
+    }
 
-h2{
-margin-top:40px;
-font-size:22px;
-}
+    /* ─── SECTION SHARED ───────────────────────────────── */
+    section { padding: 100px 48px; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
 
-/* Highlight card */
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      max-width: 540px;
+      line-height: 1.7;
+    }
 
-.card{
-border:1px solid #eee;
-padding:25px;
-border-radius:6px;
-margin-top:30px;
-}
+    /* ─── WORK ─────────────────────────────────────────── */
+    #work { background: var(--surface); }
 
-/* Work grid */
+    .work-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 56px;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
 
-.work-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-margin-top:20px;
-}
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 280px;
+      gap: 20px;
+    }
 
-.work-grid img{
-width:100%;
-border-radius:6px;
-}
+    .project-card {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--bg);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    }
+    .project-card:nth-child(1) { grid-column: span 7; }
+    .project-card:nth-child(2) { grid-column: span 5; }
+    .project-card:nth-child(3) { grid-column: span 5; }
+    .project-card:nth-child(4) { grid-column: span 7; }
+    .project-card:nth-child(5) { grid-column: span 6; }
+    .project-card:nth-child(6) { grid-column: span 6; }
 
-/* Links */
+    .project-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .project-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
 
-.links a{
-display:block;
-margin:6px 0;
-color:#0a66c2;
-text-decoration:none;
-}
+    /* Placeholder color swatches */
+    .project-card:nth-child(1) .project-placeholder { background: linear-gradient(135deg, #dde6f0, #c5d5e8); }
+    .project-card:nth-child(2) .project-placeholder { background: linear-gradient(135deg, #f0e6dd, #e8d0be); }
+    .project-card:nth-child(3) .project-placeholder { background: linear-gradient(135deg, #e6f0e6, #c8e0c8); }
+    .project-card:nth-child(4) .project-placeholder { background: linear-gradient(135deg, #f0e6f0, #e0c8e0); }
+    .project-card:nth-child(5) .project-placeholder { background: linear-gradient(135deg, #f0f0e0, #e0dcc0); }
+    .project-card:nth-child(6) .project-placeholder { background: linear-gradient(135deg, #e6eef0, #c8dce0); }
 
-/* Footer */
+    .project-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 24px;
+    }
+    .project-card:hover .project-overlay { opacity: 1; }
+    .project-meta { color: #fff; }
+    .project-name {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+    .project-tag {
+      font-size: 0.75rem;
+      opacity: 0.75;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
 
-footer{
-text-align:center;
-padding:40px;
-color:#777;
-font-size:14px;
-}
+    /* ─── ABOUT / INTERESTS ─────────────────────────────── */
+    #about { background: var(--bg); }
 
-</style>
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .interests-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .interest-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .interest-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .interest-icon {
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .interest-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+    .interest-desc {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ─── GOALS ─────────────────────────────────────────── */
+    #goals { background: var(--surface); }
+
+    .goals-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 56px;
+    }
+
+    .goal-card {
+      padding: 36px 32px;
+      background: var(--bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .goal-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .goal-card:hover::before { transform: scaleX(1); }
+
+    .goal-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    .goal-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+    }
+    .goal-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* ─── CONNECT / FOOTER ──────────────────────────────── */
+    #connect {
+      background: var(--text-primary);
+      color: #ffffff;
+      text-align: center;
+      padding: 100px 48px;
+    }
+    #connect .section-label { color: var(--accent); }
+    #connect .section-title { color: #ffffff; }
+    #connect .section-subtitle { color: rgba(255,255,255,0.55); margin: 0 auto 56px; }
+
+    .social-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: transform 0.2s, opacity 0.2s;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      color: #ffffff;
+      background: rgba(255,255,255,0.07);
+    }
+    .social-btn:hover {
+      opacity: 0.85;
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.35);
+    }
+    .social-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    .footer-bottom {
+      margin-top: 72px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+      section { padding: 72px 24px; }
+      .hero { padding: 100px 24px 72px; }
+
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .hero-photo { max-height: 360px; }
+      .work-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 220px; }
+      .project-card:nth-child(n) { grid-column: span 1; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .goals-list { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .work-grid { grid-template-columns: 1fr; }
+      .interests-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 24px; }
+    }
+  </style>
 </head>
-
-
 <body>
 
+  <!-- ─── NAV ─────────────────────────────────────────── -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">P<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#goals">Goals</a></li>
+      <li><a href="#connect">Connect</a></li>
+    </ul>
+  </nav>
 
-<!-- Navigation -->
+  <!-- ─── HERO ─────────────────────────────────────────── -->
+  <section id="home" style="padding: 0;">
+    <div class="hero">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <div class="hero-badge">Available for new opportunities</div>
+          <h1 class="hero-title">
+            Crafting products<br/>
+            people <em>love</em> to use.
+          </h1>
+          <p class="hero-bio">
+            I'm Purushotham — a Lead Product Designer with 8+ years of experience turning complex problems into clear, elegant, and human-centred digital experiences.
+          </p>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-number">8+</div>
+              <div class="stat-label">Years experience</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">40+</div>
+              <div class="stat-label">Projects shipped</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">12+</div>
+              <div class="stat-label">Teams collaborated</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-photo">
+          <!-- Replace with your photo: <img src="photo.jpg" alt="Purushotham" /> -->
+          <div class="hero-photo-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <span>Your photo here</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<div class="nav">
+  <!-- ─── WORK ─────────────────────────────────────────── -->
+  <section id="work">
+    <div class="section-inner">
+      <div class="work-header">
+        <div>
+          <div class="section-label">Selected Work</div>
+          <h2 class="section-title">Recent projects</h2>
+        </div>
+        <p class="section-subtitle" style="max-width: 320px; font-size: 0.9rem;">
+          A curated look at the products and experiences I've designed recently.
+        </p>
+      </div>
+      <div class="work-grid">
 
-<div>
-<strong>Your Name</strong>
-</div>
+        <!-- Card 1 -->
+        <div class="project-card">
+          <!-- Replace with: <img src="project1.jpg" class="project-img" alt="Project 1" /> -->
+          <div class="project-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+            Add your project banner
+          </div>
+          <div class="project-overlay">
+            <div class="project-meta">
+              <div class="project-name">Project Title One</div>
+              <div class="project-tag">Product Design · UX Research</div>
+            </div>
+          </div>
+        </div>
 
-<div>
-<a href="#">Home</a>
-<a href="#">About</a>
-<a href="#">Work</a>
-<a href="#">Links</a>
-</div>
+        <!-- Card 2 -->
+        <div class="project-card">
+          <div class="project-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+            Add your project banner
+          </div>
+          <div class="project-overlay">
+            <div class="project-meta">
+              <div class="project-name">Project Title Two</div>
+              <div class="project-tag">Design System · Mobile</div>
+            </div>
+          </div>
+        </div>
 
-</div>
+        <!-- Card 3 -->
+        <div class="project-card">
+          <div class="project-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+            Add your project banner
+          </div>
+          <div class="project-overlay">
+            <div class="project-meta">
+              <div class="project-name">Project Title Three</div>
+              <div class="project-tag">Web App · Interaction Design</div>
+            </div>
+          </div>
+        </div>
 
+        <!-- Card 4 -->
+        <div class="project-card">
+          <div class="project-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+            Add your project banner
+          </div>
+          <div class="project-overlay">
+            <div class="project-meta">
+              <div class="project-name">Project Title Four</div>
+              <div class="project-tag">SaaS · Dashboard Design</div>
+            </div>
+          </div>
+        </div>
 
+        <!-- Card 5 -->
+        <div class="project-card">
+          <div class="project-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+            Add your project banner
+          </div>
+          <div class="project-overlay">
+            <div class="project-meta">
+              <div class="project-name">Project Title Five</div>
+              <div class="project-tag">Brand Identity · Visual Design</div>
+            </div>
+          </div>
+        </div>
 
-<!-- Hero -->
+        <!-- Card 6 -->
+        <div class="project-card">
+          <div class="project-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+            Add your project banner
+          </div>
+          <div class="project-overlay">
+            <div class="project-meta">
+              <div class="project-name">Project Title Six</div>
+              <div class="project-tag">E-Commerce · UX Strategy</div>
+            </div>
+          </div>
+        </div>
 
-<div class="hero">
+      </div>
+    </div>
+  </section>
 
-<img src="https://picsum.photos/200" alt="profile">
+  <!-- ─── ABOUT ─────────────────────────────────────────── -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div>
+          <div class="section-label">About me</div>
+          <h2 class="section-title">Designing with<br/>purpose & empathy</h2>
+          <div class="about-text" style="margin-top: 28px;">
+            <p>
+              I've spent over 8 years at the intersection of design and product thinking — working across startups, scale-ups, and enterprise teams to ship experiences that are both beautiful and genuinely useful.
+            </p>
+            <p>
+              My process is rooted in understanding people first. I believe great design isn't just how something looks — it's how it makes people feel and how effortlessly it gets out of the way.
+            </p>
+            <p>
+              Outside of screens, I'm drawn to nature, stories, and anything that makes me think differently about the world.
+            </p>
+          </div>
+        </div>
+        <div>
+          <div class="section-label" style="margin-bottom: 24px;">Interests &amp; passions</div>
+          <div class="interests-grid">
+            <div class="interest-item">
+              <span class="interest-icon">🎨</span>
+              <div class="interest-title">Visual storytelling</div>
+              <div class="interest-desc">Finding meaning through art, photography, and the beauty in everyday design.</div>
+            </div>
+            <div class="interest-item">
+              <span class="interest-icon">🌿</span>
+              <div class="interest-title">Slow living</div>
+              <div class="interest-desc">Hiking, cooking, and spending time in nature to reset and reconnect.</div>
+            </div>
+            <div class="interest-item">
+              <span class="interest-icon">📚</span>
+              <div class="interest-title">Lifelong learning</div>
+              <div class="interest-desc">Obsessed with books, podcasts, and ideas from outside the design bubble.</div>
+            </div>
+            <div class="interest-item">
+              <span class="interest-icon">🤝</span>
+              <div class="interest-title">Mentorship</div>
+              <div class="interest-desc">Helping junior designers find their voice and grow with confidence.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<h1>Your Name</h1>
+  <!-- ─── GOALS ─────────────────────────────────────────── -->
+  <section id="goals">
+    <div class="section-inner">
+      <div class="section-label">Life goals</div>
+      <h2 class="section-title">What I'm working towards</h2>
+      <p class="section-subtitle">Design is a craft, but life is the bigger canvas. Here's what drives me beyond the work.</p>
+      <div class="goals-list">
+        <div class="goal-card">
+          <div class="goal-number">01</div>
+          <div class="goal-title">Build products that matter</div>
+          <div class="goal-desc">I want to design tools that solve real problems for real people — particularly in health, education, and accessibility.</div>
+        </div>
+        <div class="goal-card">
+          <div class="goal-number">02</div>
+          <div class="goal-title">Grow a design community</div>
+          <div class="goal-desc">Create a space where designers — especially in underserved regions — can learn, connect, and level up together.</div>
+        </div>
+        <div class="goal-card">
+          <div class="goal-number">03</div>
+          <div class="goal-title">Live with intention</div>
+          <div class="goal-desc">Balance ambition with presence. Spend more time with family, in nature, and on things that can't be optimised.</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<p>
-Developer • Builder • Sharing ideas on the internet
-</p>
+  <!-- ─── CONNECT ───────────────────────────────────────── -->
+  <section id="connect">
+    <div class="section-inner">
+      <div class="section-label">Let's connect</div>
+      <h2 class="section-title">Say hello.</h2>
+      <p class="section-subtitle">Whether it's a new project, collaboration, or just a good conversation — I'm always open to connecting with thoughtful people.</p>
 
-</div>
+      <div class="social-links">
 
+        <!-- LinkedIn -->
+        <a href="https://linkedin.com/in/YOUR-USERNAME" target="_blank" rel="noopener" class="social-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
 
+        <!-- Dribbble -->
+        <a href="https://dribbble.com/YOUR-USERNAME" target="_blank" rel="noopener" class="social-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+          Dribbble
+        </a>
 
-<!-- About -->
+        <!-- GitHub -->
+        <a href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener" class="social-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
 
-<div class="container">
+        <!-- YouTube -->
+        <a href="https://youtube.com/@YOUR-USERNAME" target="_blank" rel="noopener" class="social-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 0 0 1.95-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/></svg>
+          YouTube
+        </a>
 
-<h2>About</h2>
+      </div>
 
-<p>
-I am a developer interested in building tools and websites
-that make life easier. I enjoy experimenting with new
-technologies, especially in web development and AI.
-</p>
+      <div class="footer-bottom">
+        &copy; 2026 Purushotham. Designed &amp; built with care.
+      </div>
+    </div>
+  </section>
 
-<p>
-My work focuses on building useful digital products,
-learning in public, and documenting ideas that might
-help other builders on the internet.
-</p>
-
-</div>
-
-
-
-<!-- Highlight Card -->
-
-<div class="container">
-
-<div class="card">
-
-<strong>Your Name</strong><br>
-Developer & IT Consultant
-
-<p>
-Helping businesses build better websites, tools and
-automation systems.
-</p>
-
-</div>
-
-</div>
-
-
-
-<!-- Work -->
-
-<div class="container">
-
-<h2>Selected Work</h2>
-
-<div class="work-grid">
-
-<img src="https://picsum.photos/500?1">
-
-<img src="https://picsum.photos/500?2">
-
-<img src="https://picsum.photos/500?3">
-
-<img src="https://picsum.photos/500?4">
-
-</div>
-
-</div>
-
-
-
-<!-- Links -->
-
-<div class="container">
-
-<h2>Links</h2>
-
-<div class="links">
-
-<a href="#">GitHub</a>
-<a href="#">LinkedIn</a>
-<a href="#">YouTube</a>
-<a href="#">Blog</a>
-
-</div>
-
-</div>
-
-
-
-<footer>
-
-© 2026 Your Name
-
-</footer>
-
-
+  <script>
+    // Scrolled nav border
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+  </script>
 
 </body>
 </html>
