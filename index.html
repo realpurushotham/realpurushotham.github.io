@@ -5,750 +5,652 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Purushotham — Lead Product Designer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #f9f7f4;
-      --surface: #ffffff;
-      --text-primary: #111111;
-      --text-secondary: #555555;
-      --text-muted: #999999;
-      --accent: #e8572a;
-      --accent-soft: #fdf1ec;
-      --border: #e8e4df;
-      --radius: 16px;
+      --cream: #faf8f5;
+      --ink: #1a1814;
+      --ink-soft: #5a5650;
+      --ink-faint: #b0ada8;
+      --accent: #c8a96e;
+      --accent-light: #f0e6d3;
+      --line: #e8e4df;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--bg);
-      color: var(--text-primary);
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
       line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    /* ─── NAV ─────────────────────────────────────────── */
+    /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 20px 48px;
-      background: rgba(249, 247, 244, 0.85);
+      align-items: center;
+      padding: 1.5rem 4rem;
+      background: rgba(250, 248, 245, 0.88);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s;
+      border-bottom: 1px solid var(--line);
     }
-    nav.scrolled { border-bottom-color: var(--border); }
 
     .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      color: var(--text-primary);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--ink);
       text-decoration: none;
-      letter-spacing: -0.01em;
     }
-    .nav-logo span { color: var(--accent); }
 
     .nav-links {
       display: flex;
-      gap: 36px;
+      gap: 2.5rem;
       list-style: none;
     }
+
     .nav-links a {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--text-secondary);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
       text-decoration: none;
-      letter-spacing: 0.01em;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--text-primary); }
 
-    /* ─── HERO ────────────────────────────────────────── */
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── HERO ── */
     .hero {
       min-height: 100vh;
       display: flex;
-      align-items: center;
-      padding: 120px 48px 80px;
-      max-width: 1200px;
-      margin: 0 auto;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 4rem 6rem;
+      position: relative;
+      overflow: hidden;
     }
 
-    .hero-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-      width: 100%;
-    }
-
-    .hero-text {}
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      padding: 6px 14px;
-      border-radius: 100px;
-      margin-bottom: 28px;
-    }
-    .hero-badge::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.3); }
-    }
-
-    .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 5vw, 4.2rem);
-      line-height: 1.1;
+    .hero-bg-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -52%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(8rem, 18vw, 22rem);
+      font-weight: 300;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--line);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
       letter-spacing: -0.02em;
-      margin-bottom: 24px;
-      color: var(--text-primary);
     }
-    .hero-title em {
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 9vw, 9rem);
+      font-weight: 300;
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+
+    .hero-name em {
       font-style: italic;
       color: var(--accent);
     }
 
-    .hero-bio {
-      font-size: 1.05rem;
-      color: var(--text-secondary);
-      max-width: 440px;
-      margin-bottom: 40px;
-      line-height: 1.75;
+    .hero-tagline {
+      max-width: 480px;
+      font-size: 1rem;
+      color: var(--ink-soft);
+      line-height: 1.7;
+      border-left: 2px solid var(--accent);
+      padding-left: 1.25rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s forwards;
     }
 
-    .hero-stats {
+    .hero-scroll {
+      position: absolute;
+      bottom: 3rem;
+      right: 4rem;
       display: flex;
-      gap: 40px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border);
-    }
-    .stat-item {}
-    .stat-number {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .hero-photo {
-      position: relative;
-      aspect-ratio: 4/5;
-      border-radius: 24px;
-      overflow: hidden;
-      background: var(--border);
-    }
-    .hero-photo img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-    }
-    .hero-photo-placeholder {
-      width: 100%; height: 100%;
-      display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 12px;
-      background: linear-gradient(135deg, #f0ece7 0%, #e8e2db 100%);
-      color: var(--text-muted);
-      font-size: 0.875rem;
-    }
-    .hero-photo-placeholder svg {
-      width: 48px; height: 48px;
-      opacity: 0.4;
+      gap: 0.75rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      writing-mode: vertical-rl;
+      opacity: 0;
+      animation: fadeIn 1s 1.2s forwards;
     }
 
-    /* ─── SECTION SHARED ───────────────────────────────── */
-    section { padding: 100px 48px; }
-    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .hero-scroll::before {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, transparent, var(--accent));
+    }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 7rem 4rem; }
 
     .section-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 12px;
+      margin-bottom: 0.75rem;
     }
+
     .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 3.5vw, 2.8rem);
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
-    }
-    .section-subtitle {
-      font-size: 1rem;
-      color: var(--text-secondary);
-      max-width: 540px;
-      line-height: 1.7;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 3rem;
     }
 
-    /* ─── WORK ─────────────────────────────────────────── */
-    #work { background: var(--surface); }
-
-    .work-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 56px;
-      flex-wrap: wrap;
-      gap: 24px;
+    .divider {
+      height: 1px;
+      background: var(--line);
+      margin: 0 4rem;
     }
 
-    .work-grid {
+    /* ── ABOUT ── */
+    .about {
       display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      grid-auto-rows: 280px;
-      gap: 20px;
-    }
-
-    .project-card {
-      position: relative;
-      border-radius: var(--radius);
-      overflow: hidden;
-      cursor: pointer;
-      background: var(--bg);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .project-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-    }
-    .project-card:nth-child(1) { grid-column: span 7; }
-    .project-card:nth-child(2) { grid-column: span 5; }
-    .project-card:nth-child(3) { grid-column: span 5; }
-    .project-card:nth-child(4) { grid-column: span 7; }
-    .project-card:nth-child(5) { grid-column: span 6; }
-    .project-card:nth-child(6) { grid-column: span 6; }
-
-    .project-img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .project-placeholder {
-      width: 100%; height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    /* Placeholder color swatches */
-    .project-card:nth-child(1) .project-placeholder { background: linear-gradient(135deg, #dde6f0, #c5d5e8); }
-    .project-card:nth-child(2) .project-placeholder { background: linear-gradient(135deg, #f0e6dd, #e8d0be); }
-    .project-card:nth-child(3) .project-placeholder { background: linear-gradient(135deg, #e6f0e6, #c8e0c8); }
-    .project-card:nth-child(4) .project-placeholder { background: linear-gradient(135deg, #f0e6f0, #e0c8e0); }
-    .project-card:nth-child(5) .project-placeholder { background: linear-gradient(135deg, #f0f0e0, #e0dcc0); }
-    .project-card:nth-child(6) .project-placeholder { background: linear-gradient(135deg, #e6eef0, #c8dce0); }
-
-    .project-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      display: flex;
-      align-items: flex-end;
-      padding: 24px;
-    }
-    .project-card:hover .project-overlay { opacity: 1; }
-    .project-meta { color: #fff; }
-    .project-name {
-      font-weight: 600;
-      font-size: 1rem;
-      margin-bottom: 4px;
-    }
-    .project-tag {
-      font-size: 0.75rem;
-      opacity: 0.75;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    /* ─── ABOUT / INTERESTS ─────────────────────────────── */
-    #about { background: var(--bg); }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 6rem;
       align-items: start;
     }
 
-    .about-text p {
+    .about-left { position: sticky; top: 8rem; }
+
+    .about-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 7rem;
+      font-weight: 300;
+      line-height: 1;
+      color: var(--accent-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .about-body {
       font-size: 1.05rem;
-      color: var(--text-secondary);
-      line-height: 1.8;
-      margin-bottom: 20px;
+      color: var(--ink-soft);
+      line-height: 1.85;
+      margin-bottom: 1.5rem;
     }
-    .about-text p:last-child { margin-bottom: 0; }
 
-    .interests-grid {
+    .about-body strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 2rem;
+    }
+
+    .pill {
+      padding: 0.35rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: var(--ink-soft);
+      background: white;
+    }
+
+    /* ── WORK ── */
+    .work { background: white; }
+
+    .work-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
     }
 
-    .interest-item {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .interest-item:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-    .interest-icon {
-      font-size: 1.6rem;
-      margin-bottom: 12px;
-      display: block;
-    }
-    .interest-title {
-      font-weight: 600;
-      font-size: 0.95rem;
-      margin-bottom: 6px;
-    }
-    .interest-desc {
-      font-size: 0.83rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    /* ─── GOALS ─────────────────────────────────────────── */
-    #goals { background: var(--surface); }
-
-    .goals-list {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-      margin-top: 56px;
-    }
-
-    .goal-card {
-      padding: 36px 32px;
-      background: var(--bg);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
+    .work-card {
       position: relative;
       overflow: hidden;
+      border-radius: 4px;
+      background: var(--accent-light);
+      aspect-ratio: 16/10;
+      cursor: pointer;
     }
-    .goal-card::before {
-      content: '';
+
+    .work-card:first-child {
+      grid-column: span 2;
+      aspect-ratio: 21/9;
+    }
+
+    .work-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      display: block;
+    }
+
+    .work-card:hover img { transform: scale(1.04); }
+
+    .work-card-overlay {
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s ease;
-    }
-    .goal-card:hover::before { transform: scaleX(1); }
-
-    .goal-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      color: var(--border);
-      line-height: 1;
-      margin-bottom: 20px;
-      font-weight: 700;
-    }
-    .goal-title {
-      font-weight: 600;
-      font-size: 1.1rem;
-      margin-bottom: 12px;
-    }
-    .goal-desc {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      line-height: 1.65;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,24,20,0.75) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      display: flex;
+      align-items: flex-end;
+      padding: 2rem;
     }
 
-    /* ─── CONNECT / FOOTER ──────────────────────────────── */
-    #connect {
-      background: var(--text-primary);
-      color: #ffffff;
-      text-align: center;
-      padding: 100px 48px;
-    }
-    #connect .section-label { color: var(--accent); }
-    #connect .section-title { color: #ffffff; }
-    #connect .section-subtitle { color: rgba(255,255,255,0.55); margin: 0 auto 56px; }
+    .work-card:hover .work-card-overlay { opacity: 1; }
 
-    .social-links {
+    .work-card-info { color: white; }
+    .work-card-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 0.25rem;
+    }
+    .work-card-info span {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.75;
+    }
+
+    /* placeholder gradient tiles */
+    .placeholder-1 { background: linear-gradient(135deg, #e8ddd0 0%, #c9b99a 100%); }
+    .placeholder-2 { background: linear-gradient(135deg, #d0dce8 0%, #9ab0c9 100%); }
+    .placeholder-3 { background: linear-gradient(135deg, #d8e8d0 0%, #9ac9a2 100%); }
+    .placeholder-4 { background: linear-gradient(135deg, #e8d0d8 0%, #c99aac 100%); }
+    .placeholder-5 { background: linear-gradient(135deg, #e0d0e8 0%, #b09ac9 100%); }
+
+    .placeholder-inner {
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
-    .social-btn {
-      display: inline-flex;
+    /* ── INTERESTS ── */
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+    }
+
+    .interest-item {
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .interest-icon {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .interest-item h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 0.6rem;
+    }
+
+    .interest-item p {
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+
+    /* ── FOOTER / CONTACT ── */
+    .footer {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 6rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+    }
+
+    .footer-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-title em { font-style: italic; color: var(--accent); }
+
+    .footer-sub {
+      font-size: 0.9rem;
+      color: rgba(250,248,245,0.5);
+      max-width: 340px;
+      line-height: 1.7;
+    }
+
+    .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 3rem; }
+
+    .social-links {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 1rem;
+    }
+
+    .social-link {
+      display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 14px 28px;
-      border-radius: 100px;
-      font-size: 0.875rem;
-      font-weight: 600;
+      gap: 0.75rem;
+      color: rgba(250,248,245,0.6);
       text-decoration: none;
-      letter-spacing: 0.01em;
-      transition: transform 0.2s, opacity 0.2s;
-      border: 1.5px solid rgba(255,255,255,0.15);
-      color: #ffffff;
-      background: rgba(255,255,255,0.07);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
     }
-    .social-btn:hover {
-      opacity: 0.85;
-      transform: translateY(-2px);
-      border-color: rgba(255,255,255,0.35);
+
+    .social-link:hover { color: var(--accent); }
+
+    .social-link svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
     }
-    .social-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
 
     .footer-bottom {
-      margin-top: 72px;
-      padding-top: 32px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.3);
+      grid-column: span 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(250,248,245,0.1);
+      font-size: 0.75rem;
+      color: rgba(250,248,245,0.3);
+      letter-spacing: 0.08em;
     }
 
-    /* ─── RESPONSIVE ─────────────────────────────────────── */
-    @media (max-width: 900px) {
-      nav { padding: 18px 24px; }
-      .nav-links { display: none; }
-      section { padding: 72px 24px; }
-      .hero { padding: 100px 24px 72px; }
-
-      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-      .hero-photo { max-height: 360px; }
-      .work-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 220px; }
-      .project-card:nth-child(n) { grid-column: span 1; }
-      .about-grid { grid-template-columns: 1fr; gap: 48px; }
-      .goals-list { grid-template-columns: 1fr; }
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    @media (max-width: 600px) {
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1.25rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      section { padding: 5rem 1.5rem; }
+      .divider { margin: 0 1.5rem; }
+      .hero { padding: 0 1.5rem 5rem; }
+      .hero-scroll { display: none; }
+      .about { grid-template-columns: 1fr; gap: 2rem; }
+      .about-left { position: static; }
       .work-grid { grid-template-columns: 1fr; }
+      .work-card:first-child { grid-column: span 1; aspect-ratio: 16/10; }
       .interests-grid { grid-template-columns: 1fr; }
-      .hero-stats { gap: 24px; }
+      .footer { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+      .footer-right { align-items: flex-start; }
+      .social-links { align-items: flex-start; }
+      .footer-bottom { grid-column: span 1; flex-direction: column; gap: 0.5rem; text-align: center; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ─── NAV ─────────────────────────────────────────── -->
-  <nav id="navbar">
-    <a href="#" class="nav-logo">P<span>.</span></a>
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Purushotham</a>
     <ul class="nav-links">
-      <li><a href="#work">Work</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#goals">Goals</a></li>
-      <li><a href="#connect">Connect</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#interests">Interests</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
-  <!-- ─── HERO ─────────────────────────────────────────── -->
-  <section id="home" style="padding: 0;">
-    <div class="hero">
-      <div class="hero-inner">
-        <div class="hero-text">
-          <div class="hero-badge">Available for new opportunities</div>
-          <h1 class="hero-title">
-            Crafting products<br/>
-            people <em>love</em> to use.
-          </h1>
-          <p class="hero-bio">
-            I'm Purushotham — a Lead Product Designer with 8+ years of experience turning complex problems into clear, elegant, and human-centred digital experiences.
-          </p>
-          <div class="hero-stats">
-            <div class="stat-item">
-              <div class="stat-number">8+</div>
-              <div class="stat-label">Years experience</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">40+</div>
-              <div class="stat-label">Projects shipped</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">12+</div>
-              <div class="stat-label">Teams collaborated</div>
-            </div>
-          </div>
-        </div>
-        <div class="hero-photo">
-          <!-- Replace with your photo: <img src="photo.jpg" alt="Purushotham" /> -->
-          <div class="hero-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
-            </svg>
-            <span>Your photo here</span>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-text" aria-hidden="true">Design</div>
+    <p class="hero-eyebrow">Lead Product Designer · 8+ Years</p>
+    <h1 class="hero-name">Puru<em>sho</em><br>tham.</h1>
+    <p class="hero-tagline">
+      Turning complex problems into calm, intuitive experiences — 
+      where clarity meets craft, and every pixel has a purpose.
+    </p>
+    <div class="hero-scroll" aria-hidden="true">Scroll</div>
   </section>
 
-  <!-- ─── WORK ─────────────────────────────────────────── -->
-  <section id="work">
-    <div class="section-inner">
-      <div class="work-header">
-        <div>
-          <div class="section-label">Selected Work</div>
-          <h2 class="section-title">Recent projects</h2>
-        </div>
-        <p class="section-subtitle" style="max-width: 320px; font-size: 0.9rem;">
-          A curated look at the products and experiences I've designed recently.
-        </p>
-      </div>
-      <div class="work-grid">
+  <div class="divider"></div>
 
-        <!-- Card 1 -->
-        <div class="project-card">
-          <!-- Replace with: <img src="project1.jpg" class="project-img" alt="Project 1" /> -->
-          <div class="project-placeholder">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
-            Add your project banner
-          </div>
-          <div class="project-overlay">
-            <div class="project-meta">
-              <div class="project-name">Project Title One</div>
-              <div class="project-tag">Product Design · UX Research</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="project-card">
-          <div class="project-placeholder">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
-            Add your project banner
-          </div>
-          <div class="project-overlay">
-            <div class="project-meta">
-              <div class="project-name">Project Title Two</div>
-              <div class="project-tag">Design System · Mobile</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="project-card">
-          <div class="project-placeholder">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
-            Add your project banner
-          </div>
-          <div class="project-overlay">
-            <div class="project-meta">
-              <div class="project-name">Project Title Three</div>
-              <div class="project-tag">Web App · Interaction Design</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="project-card">
-          <div class="project-placeholder">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
-            Add your project banner
-          </div>
-          <div class="project-overlay">
-            <div class="project-meta">
-              <div class="project-name">Project Title Four</div>
-              <div class="project-tag">SaaS · Dashboard Design</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 5 -->
-        <div class="project-card">
-          <div class="project-placeholder">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
-            Add your project banner
-          </div>
-          <div class="project-overlay">
-            <div class="project-meta">
-              <div class="project-name">Project Title Five</div>
-              <div class="project-tag">Brand Identity · Visual Design</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 6 -->
-        <div class="project-card">
-          <div class="project-placeholder">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
-            Add your project banner
-          </div>
-          <div class="project-overlay">
-            <div class="project-meta">
-              <div class="project-name">Project Title Six</div>
-              <div class="project-tag">E-Commerce · UX Strategy</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── ABOUT ─────────────────────────────────────────── -->
+  <!-- ABOUT -->
   <section id="about">
-    <div class="section-inner">
-      <div class="about-grid">
-        <div>
-          <div class="section-label">About me</div>
-          <h2 class="section-title">Designing with<br/>purpose & empathy</h2>
-          <div class="about-text" style="margin-top: 28px;">
-            <p>
-              I've spent over 8 years at the intersection of design and product thinking — working across startups, scale-ups, and enterprise teams to ship experiences that are both beautiful and genuinely useful.
-            </p>
-            <p>
-              My process is rooted in understanding people first. I believe great design isn't just how something looks — it's how it makes people feel and how effortlessly it gets out of the way.
-            </p>
-            <p>
-              Outside of screens, I'm drawn to nature, stories, and anything that makes me think differently about the world.
-            </p>
+    <div class="about">
+      <div class="about-left reveal">
+        <p class="section-label">About Me</p>
+        <div class="about-number">08</div>
+        <p style="font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint);">Years of Experience</p>
+      </div>
+      <div class="reveal">
+        <h2 class="section-title">Design is how I<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;">make sense</em> of the world.</h2>
+        <p class="about-body">
+          I'm <strong>Purushotham</strong>, a Lead Product Designer with over 8 years of experience crafting digital products that people actually love using. I bridge the gap between user needs and business goals — through research, systems thinking, and an obsessive attention to detail.
+        </p>
+        <p class="about-body">
+          From early-stage startups to scaling products, I've led design across <strong>mobile apps, SaaS platforms, and design systems</strong>. I believe the best interfaces feel almost invisible — they just work.
+        </p>
+        <div class="pills">
+          <span class="pill">Product Strategy</span>
+          <span class="pill">UX Research</span>
+          <span class="pill">Design Systems</span>
+          <span class="pill">Interaction Design</span>
+          <span class="pill">Prototyping</span>
+          <span class="pill">Figma</span>
+          <span class="pill">User Testing</span>
+          <span class="pill">Mobile & Web</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- WORK -->
+  <section id="work" class="work">
+    <p class="section-label reveal">Selected Work</p>
+    <h2 class="section-title reveal">Recent Projects</h2>
+
+    <div class="work-grid">
+      <div class="work-card placeholder-1 reveal">
+        <div class="placeholder-inner">Your Banner Image Here</div>
+        <div class="work-card-overlay">
+          <div class="work-card-info">
+            <h3>Project One</h3>
+            <span>Product Design · 2024</span>
           </div>
         </div>
-        <div>
-          <div class="section-label" style="margin-bottom: 24px;">Interests &amp; passions</div>
-          <div class="interests-grid">
-            <div class="interest-item">
-              <span class="interest-icon">🎨</span>
-              <div class="interest-title">Visual storytelling</div>
-              <div class="interest-desc">Finding meaning through art, photography, and the beauty in everyday design.</div>
-            </div>
-            <div class="interest-item">
-              <span class="interest-icon">🌿</span>
-              <div class="interest-title">Slow living</div>
-              <div class="interest-desc">Hiking, cooking, and spending time in nature to reset and reconnect.</div>
-            </div>
-            <div class="interest-item">
-              <span class="interest-icon">📚</span>
-              <div class="interest-title">Lifelong learning</div>
-              <div class="interest-desc">Obsessed with books, podcasts, and ideas from outside the design bubble.</div>
-            </div>
-            <div class="interest-item">
-              <span class="interest-icon">🤝</span>
-              <div class="interest-title">Mentorship</div>
-              <div class="interest-desc">Helping junior designers find their voice and grow with confidence.</div>
-            </div>
+      </div>
+
+      <div class="work-card placeholder-2 reveal">
+        <div class="placeholder-inner">Your Banner Image Here</div>
+        <div class="work-card-overlay">
+          <div class="work-card-info">
+            <h3>Project Two</h3>
+            <span>UX Research · 2024</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-card placeholder-3 reveal">
+        <div class="placeholder-inner">Your Banner Image Here</div>
+        <div class="work-card-overlay">
+          <div class="work-card-info">
+            <h3>Project Three</h3>
+            <span>Design System · 2023</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-card placeholder-4 reveal">
+        <div class="placeholder-inner">Your Banner Image Here</div>
+        <div class="work-card-overlay">
+          <div class="work-card-info">
+            <h3>Project Four</h3>
+            <span>Mobile App · 2023</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ─── GOALS ─────────────────────────────────────────── -->
-  <section id="goals">
-    <div class="section-inner">
-      <div class="section-label">Life goals</div>
-      <h2 class="section-title">What I'm working towards</h2>
-      <p class="section-subtitle">Design is a craft, but life is the bigger canvas. Here's what drives me beyond the work.</p>
-      <div class="goals-list">
-        <div class="goal-card">
-          <div class="goal-number">01</div>
-          <div class="goal-title">Build products that matter</div>
-          <div class="goal-desc">I want to design tools that solve real problems for real people — particularly in health, education, and accessibility.</div>
-        </div>
-        <div class="goal-card">
-          <div class="goal-number">02</div>
-          <div class="goal-title">Grow a design community</div>
-          <div class="goal-desc">Create a space where designers — especially in underserved regions — can learn, connect, and level up together.</div>
-        </div>
-        <div class="goal-card">
-          <div class="goal-number">03</div>
-          <div class="goal-title">Live with intention</div>
-          <div class="goal-desc">Balance ambition with presence. Spend more time with family, in nature, and on things that can't be optimised.</div>
-        </div>
+  <div class="divider"></div>
+
+  <!-- INTERESTS -->
+  <section id="interests">
+    <p class="section-label reveal">Beyond Design</p>
+    <h2 class="section-title reveal">Life & Curiosities</h2>
+
+    <div class="interests-grid">
+      <div class="interest-item reveal">
+        <div class="interest-icon">🎥</div>
+        <h3>Storytelling</h3>
+        <p>Creating content on YouTube that explores design thinking, creativity, and the human side of building products. Stories are how we make meaning.</p>
+      </div>
+      <div class="interest-item reveal">
+        <div class="interest-icon">🌿</div>
+        <h3>Mindful Living</h3>
+        <p>Practising intentionality — in design and in life. Finding calm in routines, nature walks, and the slow art of doing one thing at a time.</p>
+      </div>
+      <div class="interest-item reveal">
+        <div class="interest-icon">📚</div>
+        <h3>Continuous Learning</h3>
+        <p>Curious by nature. Always reading, exploring new tools, and connecting ideas across disciplines — from psychology to philosophy to technology.</p>
+      </div>
+      <div class="interest-item reveal">
+        <div class="interest-icon">🤝</div>
+        <h3>Mentoring</h3>
+        <p>Helping early-career designers find their voice and navigate the craft. Giving back to a community that shaped who I am today.</p>
+      </div>
+      <div class="interest-item reveal">
+        <div class="interest-icon">🌍</div>
+        <h3>Cultural Curiosity</h3>
+        <p>Fascinated by how different cultures approach aesthetics, problem-solving, and daily life. Travel and diversity fuel better design thinking.</p>
+      </div>
+      <div class="interest-item reveal">
+        <div class="interest-icon">✨</div>
+        <h3>Building in Public</h3>
+        <p>Sharing the process, not just the polished outcome. Documenting learnings, failures, and breakthroughs openly on Instagram and beyond.</p>
       </div>
     </div>
   </section>
 
-  <!-- ─── CONNECT ───────────────────────────────────────── -->
-  <section id="connect">
-    <div class="section-inner">
-      <div class="section-label">Let's connect</div>
-      <h2 class="section-title">Say hello.</h2>
-      <p class="section-subtitle">Whether it's a new project, collaboration, or just a good conversation — I'm always open to connecting with thoughtful people.</p>
+  <!-- FOOTER / CONTACT -->
+  <footer id="contact" class="footer">
+    <div>
+      <h2 class="footer-title">Let's build something<br><em>meaningful.</em></h2>
+      <p class="footer-sub">Open to conversations about product design, collaboration, speaking, or just a good chat about craft and creativity.</p>
+    </div>
 
+    <div class="footer-right">
       <div class="social-links">
 
-        <!-- LinkedIn -->
-        <a href="https://linkedin.com/in/YOUR-USERNAME" target="_blank" rel="noopener" class="social-btn">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        <a href="https://www.linkedin.com/in/realpurushotham/" target="_blank" rel="noopener" class="social-link">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           LinkedIn
         </a>
 
-        <!-- Dribbble -->
-        <a href="https://dribbble.com/YOUR-USERNAME" target="_blank" rel="noopener" class="social-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
-          Dribbble
+        <a href="https://www.instagram.com/realpurushotham" target="_blank" rel="noopener" class="social-link">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          Instagram
         </a>
 
-        <!-- GitHub -->
-        <a href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener" class="social-btn">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-          GitHub
-        </a>
-
-        <!-- YouTube -->
-        <a href="https://youtube.com/@YOUR-USERNAME" target="_blank" rel="noopener" class="social-btn">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 0 0 1.95-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/></svg>
+        <a href="https://www.youtube.com/@realpurushotham" target="_blank" rel="noopener" class="social-link">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
           YouTube
         </a>
 
-      </div>
+        <a href="https://github.com/realpurushotham" target="_blank" rel="noopener" class="social-link">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          GitHub
+        </a>
 
-      <div class="footer-bottom">
-        &copy; 2026 Purushotham. Designed &amp; built with care.
       </div>
     </div>
-  </section>
+
+    <div class="footer-bottom">
+      <span>© 2025 Purushotham. All rights reserved.</span>
+      <span>Designed & built with intention.</span>
+    </div>
+  </footer>
 
   <script>
-    // Scrolled nav border
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 20);
-    });
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
   </script>
 
 </body>
